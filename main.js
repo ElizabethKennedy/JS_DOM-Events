@@ -3,21 +3,50 @@ console.log("Script attached");
 
 // Select Node #1 and change the text to: "I used the getElementById("node1") method to access this"
 
+let node1 = document.getElementById("node1");
+        node1.textContent = 'I used the getElementById("node1") method to access this';
 // Select Node #2 and change the text to: "I used the getElementByClassName("node2") method to access this" */
 
-// Select ALL the h3 tags and change the text to: "I used the getElementByTagName("h3") method to access all of these" */
+let node2 = document.getElementsByClassName("node2")[0];
+         node2.textContent = 'I used the getElementByClassName("node2") method to access this'; 
+    // Select ALL the h3 tags and change the text to: "I used the getElementByTagName("h3") method to access all of these" */
+
+let h3s = document.getElementByTagName("h3");
+
+        for (let h3 of h3s) {
+          h3.textContent =
+          `I used the getElementByTagName("h3") method to access all of these`;
+        }
 
 /*----------- Exercise #2: CREATING/APPENDING/INSERTING ELEMENTS/OBJECTS -----------*/
 
 // TODO: Create a paragraph element using this document.createElement() and put this text inside "This node was created using the createElement() method"
-
+let p = document.createElement("p");
+      p.textContent = "This node was created using the createElement() method";
 // TODO: Append the created node to the parent node using the element.appendChild() method
-
+let parent2 = document.querySelector("#parent");
+        parent2.appendChild(p);
+            let a = document.createElement("a");
+            a.textContent = "Visit me, I am a <a> tag leading to Cafe Astrology";
+            a.href = "https://www.cafeastrology.com";
 // TODO: Create a <a> element using this document.createElement() and put this text inside "I am a <a> tag"
 
 // BONUS: Add a link href to the <a>
 
 // TODO: Insert the created <a> in the parent but before the <p> you just created using the element.insertBefore() method
+        let child = document.createElement("p");
+        child.textContent = "New Child Node";
+        let otherParent = document.getElementById("#exercise-container3");
+        let oldChild = document.getElementById("N1");
+        otherParent.replaceChild (child, oldChild); 
+        otherParent.removeChild(child);
+        
+        setTimeout(() => {
+            otherParent.replaceChild (child, oldChild); 
+            otherParent.removeChild(child);
+         },   5000);
+
+
 
 /*----------- Exercise #3: REMOVING/REPLACING ELEMENTS/OBJECTS -----------*/
 
@@ -38,6 +67,23 @@ let list = [ "apples", "bananas", "carrots", "dragon fruit", "eggplant", "fish",
 // TODO: Append the new list items to the unordered list element
 
 // TODO: Append the unordered list to the `div#container` under exercise 4 
+let ul = document.createElement("ul");
+ul.textContent = `GROCERY LIST`
+// TODO: Iterate over the array values, and create a list item element for each
+list.forEach ((item) =>  {
+    let li = document.createElement("li");
+    li.textContent = item;
+
+// TODO: Append the new list items to the unordered list element
+    ul.appendChild(li);
+});
+// TODO: Append the unordered list to the `div#container` under exercise 4 
+let container4 = document.querySelector("#container");
+container4.appendChild(ul)
+
+
+
+
 
 /*----------- Exercise #5: DOM EVENTS --------------*/
 
@@ -45,3 +91,49 @@ let list = [ "apples", "bananas", "carrots", "dragon fruit", "eggplant", "fish",
 // -> "Clicking the button triggers the onclick event, which calls the JS function show()... which alerts the user"
 // This div should be a 'modal' that covers the main content on the screen
 // BONUS: The modal popup should be able to be closed. Refactor for this functionality
+
+function handleEsc (event) {
+    if (event.key == "Escape") {
+        document.body.removeChild(document.querySelector("#modal"));
+    }
+}
+
+function show (event) {
+    let modalContainer = document.createElement("div");
+    let modalBody = document.createElement("div");
+    let title = document.createElement ("h2");
+    let modalContent = document.createElement ("p");
+    let closeButton = document.createElement ('button');
+
+    modalBody.append (title, modalContent, closeButton);
+    modalContainer.appendChild (modalBody);
+    document.body.appendChild (modalContainer);
+    modalContainer.id = "modal";
+    modalBody.classList.add("modal-card");
+
+    title.textContent = "MODAL";
+    modalContent.textContent = "This is a modal!";
+    closeButton.textContent = "CLOSE";
+
+    modalContainer.addEventListener("click", (event) => {
+        console.log (event);
+        if (event.target == modalContainer) {
+            document.body.removeChild(modalContainer);
+            window.removeEventListener("keyup", handleEsc);
+        }
+    });    
+
+    closeButton.addEventListener("click", (event) => {
+        document.body.removeChild(modalContainer);
+        window.removeEventListener("keyup", handleEsc);
+    });
+
+    window.addEventListener("keyup", handleEsc);
+}
+
+let btn = document.querySelector("#btn");
+
+btn.addEventListener("click", show);
+
+
+
