@@ -49,6 +49,7 @@ body {
   box-shadow: 0 0 2rem #000;
   max-width: 600px;
   width: 100%;
+  background-color: rgb(12, 0, 255);
 }
 
 .exercise4 {
