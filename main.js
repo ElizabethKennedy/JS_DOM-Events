@@ -65,53 +65,52 @@ let container4 = document.querySelector("#container");
 container4.appendChild(ul)
 
 /* ---------------- Exercise #5 : DOM EVENTS ----------------*/
-function show() {
-    let div = document.createElement("div");
-    div.textContent = "Clicking the button triggers the onclick event, which calls the JS function show()... which alerts the user";
-    
-    let button = document.getElementById("btn");
-    button.parentNode.insertBefore(div, button);
+// TODO: Write your JavaScript here to make the red box go from right to left
+let box = document.getElementById("box");
+let container = document.getElementById("container");
+let posX = 0;
 
-    function handleEsc (event) {
-        if (event.key == "Escape") {
-            document.body.removeChild(document.querySelector("#modal"));
-        }
-    }
-    
-    function show (event) {
-        let modalContainer = document.createElement("div");
-        let modalBody = document.createElement("div");
-        let title = document.createElement ("h2");
-        let modalContent = document.createElement ("p");
-        let closeButton = document.createElement ('button');
-    
-        modalBody.append (title, modalContent, closeButton);
-        modalContainer.appendChild (modalBody);
-        document.body.appendChild (modalContainer);
-        modalContainer.id = "modal";
-        modalBody.classList.add("modal-card");
-    
-        title.textContent = "MODAL";
-        modalContent.textContent = "This is a modal!";
-        closeButton.textContent = "CLOSE";
-    
-        modalContainer.addEventListener("click", (event) => {
-            console.log (event);
-            if (event.target == modalContainer) {
-                document.body.removeChild(modalContainer);
-                window.removeEventListener("keyup", handleEsc);
-            }
-        });    
-    
-        closeButton.addEventListener("click", (event) => {
-            document.body.removeChild(modalContainer);
-            window.removeEventListener("keyup", handleEsc);
-        });
-    
-        window.addEventListener("keyup", handleEsc);
-    }
-    
-    let btn = document.querySelector("#btn");
-    
-    btn.addEventListener("click", show);
+function moveBox() {
+  if (posX <= container.offsetWidth - box.offsetWidth) {
+    box.style.left = posX + "px";
+    posX++;
+  } else {
+    clearInterval();
+  }
 }
+
+setInterval(moveBox, 100);
+// BONUS - Make the red box go all the way around the perimeter of the green box */
+
+/*----------- Exercise #5: DOM EVENTS ------*/
+function show() {
+    let modalContainer = document.createElement("div");
+    let modalCard = document.createElement("div");
+    let h2 = document.createElement("h2");
+    let p = document.createElement("p");
+    let closeBtn = document.createElement("button");
+  
+    // add content to the modalCard
+    h2.textContent = "Modal Header";
+    p.textContent = "Content: Elizabeth Kennedy in Node-10. learning to manipulate the DOM!";
+    closeBtn.textContent = "Close";
+  
+    closeBtn.addEventListener("click", () => {
+      document.body.removeChild(modalContainer);
+    });
+  
+    modalCard.append(h2, p, closeBtn);
+    modalCard.classList.add("modal-card");
+  
+    // add the modalCard to the modal
+    modalContainer.id = "modal";
+    modalContainer.appendChild(modalCard);
+  
+    // add the modal to the body
+    document.body.appendChild(modalContainer);
+  }
+  
+  let button = document.querySelector("#btn");
+  button.addEventListener("click", show);
+
+  
