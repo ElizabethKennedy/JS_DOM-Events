@@ -64,23 +64,6 @@ list.forEach ((item) =>  {
 let container4 = document.querySelector("#container");
 container4.appendChild(ul)
 
-/* ---------------- Exercise #5 : DOM EVENTS ----------------*/
-// TODO: Write your JavaScript here to make the red box go from right to left
-let box = document.getElementById("box");
-let container = document.getElementById("container");
-let posX = 0;
-
-function moveBox() {
-  if (posX <= container.offsetWidth - box.offsetWidth) {
-    box.style.left = posX + "px";
-    posX++;
-  } else {
-    clearInterval();
-  }
-}
-
-setInterval(moveBox, 100);
-// BONUS - Make the red box go all the way around the perimeter of the green box */
 
 /*----------- Exercise #5: DOM EVENTS ------*/
 function show() {
