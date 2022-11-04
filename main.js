@@ -80,7 +80,7 @@ function show() {
     let p = document.createElement("p");
     let closeBtn = document.createElement("button");
   
-    // add content to the modalCard
+    // add content to the modal
     h2.textContent = "Modal Header";
     p.textContent = "Content: Elizabeth Kennedy in Node-10, manipulating the DOM!";
     closeBtn.textContent = "Close";
