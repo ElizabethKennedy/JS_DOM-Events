@@ -35,13 +35,20 @@ parent2.insertBefore(a, p);
 /*----------- Exercise #3: REMOVING/REPLACING ELEMENTS/OBJECTS -----------*/
 // TODO: Replace the "Child Node" with a new <p> element that reads "New Child Node"
 
-let child = document.createElement("N1");
-let newChild = document.createElement("p");
-newChild.textContent = "New Child Node";
-child.replaceWith(newChild);
 
-// TODO: Remove the "New Child Node"
-newChild.remove();
+let exercise3Container = document.querySelector("#exercise-container3");
+let oldChild = document.querySelector("#N1");
+
+let newChildNode = document.createElement("p");
+newChildNode.textContent = "Child Node that replaces old child";
+
+exercise3Container.replaceChild(newChildNode, oldChild);
+
+function removeChild() {
+  exercise3Container.removeChild(newChildNode);
+}
+
+setTimeout(removeChild, 5000);
 
 /*----------- Exercise #4: LIST ITEMS ----------- */
 // Use the following array of values to generate a list on the DOM
