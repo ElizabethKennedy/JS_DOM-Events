@@ -82,7 +82,7 @@ function show() {
   
     // add content to the modalCard
     h2.textContent = "Modal Header";
-    p.textContent = "Content: Elizabeth Kennedy in Node-10. learning to manipulate the DOM!";
+    p.textContent = "Content: Elizabeth Kennedy in Node-10, manipulating the DOM!";
     closeBtn.textContent = "Close";
   
     closeBtn.addEventListener("click", () => {
